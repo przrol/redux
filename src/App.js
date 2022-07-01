@@ -1,21 +1,22 @@
-import React from 'react';
+import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import "./App.css";
+import { incremented, decremented, addedBy } from "./store";
 
 function App() {
   const counter = useSelector((state) => state.counter);
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   const increment = () => {
-    dispatch({type: 'INC'})
-  }
+    dispatch(incremented());
+  };
 
   const decrement = () => {
-    dispatch({type: 'DEC'})
-  }
+    dispatch(decremented());
+  };
   const addBy = () => {
-    dispatch({type: 'ADD', payload: 10})
-  }
+    dispatch(addedBy(10));
+  };
 
   return (
     <div>

@@ -1,20 +1,24 @@
-import { createStore } from "redux";
+import { configureStore, createSlice } from "@reduxjs/toolkit";
 
-const reducerFn = (state = { counter: 0 }, action) => {
-  //Synchronous Function
-  //We should not mutate the original state
-  if (action.type === "INC") {
-    return { counter: state.counter + 1 };
-  }
-  if (action.type === "DEC") {
-    return { counter: state.counter - 1 };
-  }
-  if (action.type === "ADD") {
-    return { counter: state.counter + action.payload };
-  }
+const counterSlice = createSlice({
+  name: "counter",
+  initialState: { counter: 0 },
+  reducers: {
+    incremented(state, action) {
+      state.counter += 1;
+    },
+    decremented(state, action) {
+      state.counter -= 1;
+    },
+    addedBy(state, action) {
+      state.counter += action.payload;
+    },
+  },
+});
 
-  return state;
-};
+export const { incremented, decremented, addedBy } = counterSlice.actions;
 
-const store = createStore(reducerFn);
+const store = configureStore({
+  reducer: counterSlice.reducer,
+});
 export default store;
